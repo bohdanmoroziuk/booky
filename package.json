@@ -9,6 +9,7 @@
     "lint": "eslint --ext .js,.ts,.vue ./",
     "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
     "dev": "quasar dev",
+    "dev:server": "json-server --watch public/db.json",
     "build": "quasar build",
     "test:unit:ui": "majestic",
     "test:unit": "jest --updateSnapshot",
