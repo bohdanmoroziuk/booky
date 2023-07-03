@@ -1,0 +1,14 @@
+{
+  "bookmarks": [
+    {
+      "id": "1",
+      "name": "Vue.js",
+      "url": "https://vuejs.org/"
+    },
+    {
+      "id": "2",
+      "name": "React",
+      "url": "https://react.dev/"
+    }
+  ]
+}
