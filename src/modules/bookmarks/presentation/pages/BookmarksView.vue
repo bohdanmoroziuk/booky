@@ -4,9 +4,11 @@ import { storeToRefs } from 'pinia';
 
 import { useBookmarksStore } from 'src/modules/bookmarks/presentation/stores';
 
+import BookmarkList from 'src/modules/bookmarks/presentation/components/BookmarkList.vue';
+
 const bookmarksStore = useBookmarksStore();
 
-const { totalBookmarks } = storeToRefs(bookmarksStore);
+const { bookmarks } = storeToRefs(bookmarksStore);
 
 onMounted(async () => {
   await bookmarksStore.getBookmarks();
@@ -14,7 +16,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="q-pa-md">
-    Total bookmarks: {{ totalBookmarks }}
+  <div>
+    <bookmark-list :bookmarks="bookmarks" />
   </div>
 </template>
