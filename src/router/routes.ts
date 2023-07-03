@@ -1,14 +1,13 @@
 import { RouteRecordRaw } from 'vue-router';
 
+import { routes as bookmarksRoutes } from 'src/modules/bookmarks/presentation';
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      {
-        path: '',
-        component: () => import('pages/IndexPage.vue'),
-      },
+      ...bookmarksRoutes,
     ],
   },
   {
