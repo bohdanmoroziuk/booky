@@ -7,8 +7,10 @@ import { HttpClient, RequestConfig } from 'src/shared/infrastructure/interfaces'
 export class AxiosHttpClient implements HttpClient {
   private http: AxiosInstance;
 
-  constructor() {
-    this.http = axios.create();
+  constructor(baseUrl: string) {
+    this.http = axios.create({
+      baseURL: baseUrl,
+    });
   }
 
   async get<T>(url: string, config?: RequestConfig | undefined): Promise<T> {
