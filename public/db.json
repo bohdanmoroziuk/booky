@@ -9,6 +9,16 @@
       "id": "2",
       "name": "React",
       "url": "https://react.dev/"
+    },
+    {
+      "id": "ada38659-2b32-40fe-98b8-714f843888d6",
+      "name": "TypeScript",
+      "url": "https://www.typescriptlang.org/"
+    },
+    {
+      "id": "2db3dc82-745a-42c7-870f-17dcc0922c0c",
+      "name": "MDN",
+      "url": "https://developer.mozilla.org/en-US/"
     }
   ]
 }

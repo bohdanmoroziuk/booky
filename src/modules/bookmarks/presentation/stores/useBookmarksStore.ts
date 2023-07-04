@@ -1,4 +1,5 @@
 import { ref, computed } from 'vue';
+import { uid } from 'quasar';
 import { defineStore } from 'pinia';
 
 import { AxiosHttpClient } from 'src/shared/infrastructure/services';
@@ -40,9 +41,25 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
     }
   }
 
+  async function createBookmark(name: string, url: string) {
+    const bookmark = {
+      id: uid(),
+      name,
+      url,
+    };
+
+    await bookmarkService.addBookmark(bookmark);
+
+    state.value.bookmarks = [
+      ...state.value.bookmarks,
+      bookmark,
+    ];
+  }
+
   return {
     bookmarks,
     totalBookmarks,
     getBookmarks,
+    createBookmark,
   };
 });
