@@ -43,6 +43,12 @@ onMounted(handleBookmarksGet);
           unelevated
           @click="handleBookmarksGet"
         />
+        <q-btn
+          color="primary"
+          icon="add"
+          unelevated
+          :to="{ name: 'create-bookmark' }"
+        />
       </div>
     </div>
     <q-separator />
