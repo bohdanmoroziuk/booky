@@ -30,6 +30,21 @@ const handleBookmarksGet = async () => {
   }
 };
 
+const handleBookmarkDelete = async (id: string) => {
+  try {
+    quasar.loading.show();
+
+    await sleep(500);
+    await bookmarksStore.deleteBookmark(id);
+
+    quasar.notify({ type: 'positive', message: 'Bookmark deleted' });
+  } catch (error) {
+    quasar.notify({ type: 'negative', message: (error as Error).message });
+  } finally {
+    quasar.loading.hide();
+  }
+};
+
 onMounted(handleBookmarksGet);
 </script>
 
@@ -52,6 +67,9 @@ onMounted(handleBookmarksGet);
       </div>
     </div>
     <q-separator />
-    <bookmark-list :bookmarks="bookmarks" />
+    <bookmark-list
+      :bookmarks="bookmarks"
+      @delete-bookmark="handleBookmarkDelete"
+    />
   </div>
 </template>

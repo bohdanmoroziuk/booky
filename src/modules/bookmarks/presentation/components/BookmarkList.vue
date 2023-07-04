@@ -7,7 +7,17 @@ interface Props {
   bookmarks: Bookmark[];
 }
 
+interface Emits {
+  (event: 'delete-bookmark', payload: string): void;
+}
+
 defineProps<Props>();
+
+const emit = defineEmits<Emits>();
+
+const deleteBookmark = (id: string) => {
+  emit('delete-bookmark', id);
+};
 </script>
 
 <template>
@@ -16,6 +26,7 @@ defineProps<Props>();
       v-for="bookmark of bookmarks"
       :key="bookmark.id"
       :bookmark="bookmark"
+      @delete="deleteBookmark(bookmark.id)"
     />
   </q-list>
 </template>

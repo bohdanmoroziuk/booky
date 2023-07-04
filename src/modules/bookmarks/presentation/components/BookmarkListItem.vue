@@ -5,7 +5,17 @@ interface Props {
   bookmark: Bookmark;
 }
 
+interface Emits {
+  (event: 'delete'): void;
+}
+
 defineProps<Props>();
+
+const emit = defineEmits<Emits>();
+
+const deleteBookmark = () => {
+  emit('delete');
+};
 </script>
 
 <template>
@@ -31,7 +41,15 @@ defineProps<Props>();
       <div class="q-gutter-xs">
         <q-btn size="md" color="positive" flat dense round icon="open_in_new" />
         <q-btn size="md" color="primary" flat dense round icon="edit" />
-        <q-btn size="md" color="negative" flat dense round icon="delete" />
+        <q-btn
+          size="md"
+          color="negative"
+          icon="delete"
+          flat
+          dense
+          round
+          @click.stop="deleteBookmark"
+        />
       </div>
     </q-item-section>
   </q-item>

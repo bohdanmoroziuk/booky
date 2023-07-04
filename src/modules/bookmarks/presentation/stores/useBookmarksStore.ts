@@ -56,10 +56,17 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
     ];
   }
 
+  async function deleteBookmark(id: string) {
+    await bookmarkService.deleteBookmark(id);
+
+    state.value.bookmarks = state.value.bookmarks.filter((bookmark) => bookmark.id !== id);
+  }
+
   return {
     bookmarks,
     totalBookmarks,
     getBookmarks,
     createBookmark,
+    deleteBookmark,
   };
 });
