@@ -10,6 +10,7 @@ import { BookmarkService } from 'src/modules/bookmarks/application/services';
 
 export interface BookmarksStoreState {
   bookmarks: Bookmark[];
+  bookmark: Bookmark | null;
 }
 
 export const useBookmarksStore = defineStore('bookmarks', () => {
@@ -23,9 +24,12 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
 
   const state = ref<BookmarksStoreState>({
     bookmarks: [],
+    bookmark: null,
   });
 
   // Getters
+
+  const bookmark = computed(() => state.value.bookmark);
 
   const bookmarks = computed(() => state.value.bookmarks);
 
@@ -62,11 +66,32 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
     state.value.bookmarks = state.value.bookmarks.filter((bookmark) => bookmark.id !== id);
   }
 
+  async function getBookmarkById(id: string) {
+    const maybeBookmark = await bookmarkService.findBookmarkById(id);
+
+    if (!maybeBookmark) throw new Error('Bookmark not found');
+
+    state.value.bookmark = maybeBookmark;
+  }
+
+  async function updateBookmark(id: string, name: string, url: string) {
+    const updatedBookmark = await bookmarkService.updateBookmark({ id, name, url });
+
+    state.value.bookmarks = state.value.bookmarks.map((bookmark) => (
+      bookmark.id === id
+        ? updatedBookmark
+        : bookmark
+    ));
+  }
+
   return {
+    bookmark,
     bookmarks,
     totalBookmarks,
     getBookmarks,
     createBookmark,
     deleteBookmark,
+    getBookmarkById,
+    updateBookmark,
   };
 });
