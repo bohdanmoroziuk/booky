@@ -1,8 +1,30 @@
 # Booky (booky)
 
-A Quasar Project
+This is a minimal example implementation of Clean Architecture in Vue/Quasar
 
-## Install the dependencies
+## Module structure
+
+```txt
+bookmarks/
+├── domain/
+│   ├── entities
+│   └── repositories
+├── infrastructure/
+│   └── repositories
+├── application/
+│   └── services
+├── presentation/
+│   ├── components
+│   ├── containers
+│   ├── pages
+│   ├── stores
+│   └── routes.ts
+└── index.ts
+```
+
+## Available scripts
+
+### Install the dependencies
 
 ```bash
 npm install

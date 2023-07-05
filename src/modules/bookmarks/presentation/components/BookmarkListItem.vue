@@ -40,7 +40,15 @@ const deleteBookmark = () => {
     <q-item-section top side>
       <div class="q-gutter-xs">
         <q-btn size="md" color="positive" flat dense round icon="open_in_new" />
-        <q-btn size="md" color="primary" flat dense round icon="edit" />
+        <q-btn
+          size="md"
+          color="primary"
+          icon="edit"
+          flat
+          dense
+          round
+          :to="{ name: 'update-bookmark', params: { bookmarkId: bookmark.id } }"
+        />
         <q-btn
           size="md"
           color="negative"

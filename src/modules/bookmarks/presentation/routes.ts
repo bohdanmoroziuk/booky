@@ -11,4 +11,10 @@ export const routes: RouteRecordRaw[] = [
     name: 'create-bookmark',
     component: () => import('src/modules/bookmarks/presentation/pages/BookmarkCreate.vue'),
   },
+  {
+    path: ':bookmarkId/edit',
+    name: 'update-bookmark',
+    props: true,
+    component: () => import('src/modules/bookmarks/presentation/pages/BookmarkUpdate.vue'),
+  },
 ];
