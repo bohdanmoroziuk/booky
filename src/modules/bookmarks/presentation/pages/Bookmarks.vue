@@ -1,51 +1,15 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { useQuasar } from 'quasar';
-import { storeToRefs } from 'pinia';
 
-import { useBookmarksStore } from 'src/modules/bookmarks/presentation/stores';
+import { useGetBookmarksController, useDeleteBookmarkController } from 'src/modules/bookmarks/presentation/controllers';
 
-import BookmarkList from 'src/modules/bookmarks/presentation/components/BookmarkList.vue';
+import { BookmarkList } from 'src/modules/bookmarks/presentation/components';
 
-const quasar = useQuasar();
+const { getBookmarks, bookmarks } = useGetBookmarksController();
 
-const bookmarksStore = useBookmarksStore();
+const { deleteBookmark } = useDeleteBookmarkController();
 
-const { bookmarks } = storeToRefs(bookmarksStore);
-
-const sleep = (delay: number) => new Promise((resolve) => {
-  setTimeout(resolve, delay);
-});
-
-const handleBookmarksGet = async () => {
-  try {
-    quasar.loading.show();
-
-    await sleep(500);
-    await bookmarksStore.getBookmarks();
-  } catch (error) {
-    quasar.notify({ type: 'negative', message: (error as Error).message });
-  } finally {
-    quasar.loading.hide();
-  }
-};
-
-const handleBookmarkDelete = async (id: string) => {
-  try {
-    quasar.loading.show();
-
-    await sleep(500);
-    await bookmarksStore.deleteBookmark(id);
-
-    quasar.notify({ type: 'positive', message: 'Bookmark deleted' });
-  } catch (error) {
-    quasar.notify({ type: 'negative', message: (error as Error).message });
-  } finally {
-    quasar.loading.hide();
-  }
-};
-
-onMounted(handleBookmarksGet);
+onMounted(getBookmarks);
 </script>
 
 <template>
@@ -56,7 +20,7 @@ onMounted(handleBookmarksGet);
           color="primary"
           icon="refresh"
           unelevated
-          @click="handleBookmarksGet"
+          @click="getBookmarks"
         />
         <q-btn
           color="primary"
@@ -69,7 +33,7 @@ onMounted(handleBookmarksGet);
     <q-separator />
     <bookmark-list
       :bookmarks="bookmarks"
-      @delete-bookmark="handleBookmarkDelete"
+      @delete-bookmark="deleteBookmark"
     />
   </div>
 </template>

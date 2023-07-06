@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { onMounted, watch, ref } from 'vue';
-import { useQuasar } from 'quasar';
-import { storeToRefs } from 'pinia';
 
-import { useBookmarksStore } from 'src/modules/bookmarks/presentation/stores';
+import { useGetBookmarkByIdController, useUpdateBookmarkController } from 'src/modules/bookmarks/presentation/controllers';
 import { BookmarkForm } from 'src/modules/bookmarks/presentation/components';
 
 interface Props {
@@ -12,11 +10,9 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const quasar = useQuasar();
+const { getBookmarkById, bookmark } = useGetBookmarkByIdController();
 
-const bookmarksStore = useBookmarksStore();
-
-const { bookmark } = storeToRefs(bookmarksStore);
+const { updateBookmark } = useUpdateBookmarkController();
 
 const name = ref('');
 
@@ -29,28 +25,12 @@ watch(bookmark, (bookmark) => {
   }
 });
 
-const handleBookmarkGetById = async () => {
-  try {
-    quasar.loading.show();
-
-    await bookmarksStore.getBookmarkById(props.bookmarkId);
-  } catch (error) {
-    quasar.notify({ type: 'negative', message: (error as Error).message });
-  } finally {
-    quasar.loading.hide();
-  }
+const handleGetBookmarkById = async () => {
+  await getBookmarkById(props.bookmarkId);
 };
 
 const handleBookmarkUpdate = async () => {
-  try {
-    quasar.loading.show();
-
-    await bookmarksStore.updateBookmark(props.bookmarkId, name.value, url.value);
-  } catch (error) {
-    quasar.notify({ type: 'negative', message: (error as Error).message });
-  } finally {
-    quasar.loading.hide();
-  }
+  await updateBookmark(props.bookmarkId, name.value, url.value);
 };
 
 const handleReset = () => {
@@ -60,7 +40,7 @@ const handleReset = () => {
   }
 };
 
-onMounted(handleBookmarkGetById);
+onMounted(handleGetBookmarkById);
 </script>
 
 <template>
