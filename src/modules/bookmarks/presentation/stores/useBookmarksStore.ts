@@ -1,8 +1,7 @@
 import { ref, computed } from 'vue';
-import { uid } from 'quasar';
 import { defineStore } from 'pinia';
 
-import { AxiosHttpClient } from 'src/shared/infrastructure/services';
+import { AxiosHttpClient, QuasarUidGenerator } from 'src/shared/infrastructure/services';
 
 import { Bookmark } from 'src/modules/bookmarks/domain/entities';
 import { HttpBookmarkRepository } from 'src/modules/bookmarks/infrastructure/repositories';
@@ -10,21 +9,23 @@ import { BookmarkService } from 'src/modules/bookmarks/application/services';
 
 export interface BookmarksStoreState {
   bookmarks: Bookmark[];
-  bookmark: Bookmark | null;
+  bookmark: Bookmark | undefined;
 }
 
 export const useBookmarksStore = defineStore('bookmarks', () => {
   const httpClient = new AxiosHttpClient('http://localhost:3000');
 
+  const uidGenerator = new QuasarUidGenerator();
+
   const bookmarkRepository = new HttpBookmarkRepository(httpClient);
 
-  const bookmarkService = new BookmarkService(bookmarkRepository);
+  const bookmarkService = new BookmarkService(bookmarkRepository, uidGenerator);
 
   // State
 
   const state = ref<BookmarksStoreState>({
     bookmarks: [],
-    bookmark: null,
+    bookmark: undefined,
   });
 
   // Getters
@@ -38,25 +39,15 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
   // Actions
 
   async function getBookmarks() {
-    try {
-      state.value.bookmarks = await bookmarkService.getBookmarks();
-    } catch (error) {
-      state.value.bookmarks = [];
-    }
+    state.value.bookmarks = await bookmarkService.getBookmarks();
   }
 
   async function createBookmark(name: string, url: string) {
-    const bookmark = {
-      id: uid(),
-      name,
-      url,
-    };
-
-    await bookmarkService.addBookmark(bookmark);
+    const createdBookmark = await bookmarkService.addBookmark(name, url);
 
     state.value.bookmarks = [
       ...state.value.bookmarks,
-      bookmark,
+      createdBookmark,
     ];
   }
 
@@ -69,13 +60,13 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
   async function getBookmarkById(id: string) {
     const maybeBookmark = await bookmarkService.findBookmarkById(id);
 
-    if (!maybeBookmark) throw new Error('Bookmark not found');
-
-    state.value.bookmark = maybeBookmark;
+    if (maybeBookmark) {
+      state.value.bookmark = maybeBookmark;
+    }
   }
 
   async function updateBookmark(id: string, name: string, url: string) {
-    const updatedBookmark = await bookmarkService.updateBookmark({ id, name, url });
+    const updatedBookmark = await bookmarkService.updateBookmark(id, name, url);
 
     state.value.bookmarks = state.value.bookmarks.map((bookmark) => (
       bookmark.id === id

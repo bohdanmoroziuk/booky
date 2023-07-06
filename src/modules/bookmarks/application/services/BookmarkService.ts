@@ -1,13 +1,20 @@
 /* eslint-disable class-methods-use-this */
 
-import { Bookmark } from 'src/modules/bookmarks/domain/entities';
+import { UidGenerator } from 'src/shared/infrastructure/interfaces';
+
 import { BookmarkRepository } from 'src/modules/bookmarks/domain/repositories';
 
 export class BookmarkService {
   private bookmarkRepository: BookmarkRepository;
 
-  constructor(bookmarkRepository: BookmarkRepository) {
+  private uidGenerator: UidGenerator;
+
+  constructor(
+    bookmarkRepository: BookmarkRepository,
+    uidGenerator: UidGenerator,
+  ) {
     this.bookmarkRepository = bookmarkRepository;
+    this.uidGenerator = uidGenerator;
   }
 
   private isValidName(value: string) {
@@ -31,15 +38,31 @@ export class BookmarkService {
     return this.bookmarkRepository.findById(id);
   }
 
-  async addBookmark(bookmark: Bookmark) {
-    if (this.isValidName(bookmark.name) === false) throw new Error('Too short name');
+  async addBookmark(name: string, url: string) {
+    if (this.isValidName(name) === false) throw new Error('Invalid name');
 
-    if (this.isValidHttpUrl(bookmark.url) === false) throw new Error('Invalid url');
+    if (this.isValidHttpUrl(url) === false) throw new Error('Invalid url');
+
+    const bookmark = {
+      id: this.uidGenerator.generate(),
+      name,
+      url,
+    };
 
     return this.bookmarkRepository.add(bookmark);
   }
 
-  async updateBookmark(bookmark: Bookmark) {
+  async updateBookmark(id: string, name: string, url: string) {
+    if (this.isValidName(name) === false) throw new Error('Invalid name');
+
+    if (this.isValidHttpUrl(url) === false) throw new Error('Invalid url');
+
+    const bookmark = {
+      id,
+      name,
+      url,
+    };
+
     return this.bookmarkRepository.update(bookmark);
   }
 

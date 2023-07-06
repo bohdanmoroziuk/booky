@@ -16,6 +16,7 @@ bookmarks/
 ├── presentation/
 │   ├── components
 │   ├── containers
+│   ├── controllers
 │   ├── pages
 │   ├── stores
 │   └── routes.ts

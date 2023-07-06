@@ -1,1 +1,2 @@
-export { default as BookmarkForm } from 'src/modules/bookmarks/presentation/components/BookmarkForm.vue';
+export { default as BookmarkForm } from './BookmarkForm.vue';
+export { default as BookmarkList } from './BookmarkList.vue';
