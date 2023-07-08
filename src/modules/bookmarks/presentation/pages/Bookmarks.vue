@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 
-import { useGetBookmarksController, useDeleteBookmarkController } from 'src/modules/bookmarks/presentation/controllers';
+import {
+  useGetBookmarksController,
+  useDeleteBookmarkController,
+  useOpenBookmarkUrlController,
+} from 'src/modules/bookmarks/presentation/controllers';
 
 import { BookmarkList } from 'src/modules/bookmarks/presentation/components';
 
 const { getBookmarks, bookmarks } = useGetBookmarksController();
 
 const { deleteBookmark } = useDeleteBookmarkController();
+
+const { openBookmarkUrl } = useOpenBookmarkUrlController();
 
 onMounted(getBookmarks);
 </script>
@@ -34,6 +40,7 @@ onMounted(getBookmarks);
     <bookmark-list
       :bookmarks="bookmarks"
       @delete-bookmark="deleteBookmark"
+      @open-bookmark-url="openBookmarkUrl"
     />
   </div>
 </template>

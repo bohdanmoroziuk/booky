@@ -7,6 +7,7 @@ interface Props {
 
 interface Emits {
   (event: 'delete'): void;
+  (event: 'open-url'): void;
 }
 
 defineProps<Props>();
@@ -15,6 +16,10 @@ const emit = defineEmits<Emits>();
 
 const deleteBookmark = () => {
   emit('delete');
+};
+
+const openBookmarkUrl = () => {
+  emit('open-url');
 };
 </script>
 
@@ -39,7 +44,15 @@ const deleteBookmark = () => {
 
     <q-item-section top side>
       <div class="q-gutter-xs">
-        <q-btn size="md" color="positive" flat dense round icon="open_in_new" />
+        <q-btn
+          size="md"
+          color="positive"
+          icon="open_in_new"
+          flat
+          dense
+          round
+          @click="openBookmarkUrl"
+        />
         <q-btn
           size="md"
           color="primary"

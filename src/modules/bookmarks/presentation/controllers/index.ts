@@ -3,3 +3,4 @@ export * from './useDeleteBookmarkController';
 export * from './useGetBookmarkByIdController';
 export * from './useUpdateBookmarkController';
 export * from './useCreateBookmarkController';
+export * from './useOpenBookmarkUrlController';
