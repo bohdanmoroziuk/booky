@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { toDisplayDate } from 'src/shared/utils';
+
 import { Bookmark } from 'src/modules/bookmarks/domain/entities';
 
 interface Props {
@@ -30,16 +32,22 @@ const openBookmarkUrl = () => {
     </q-item-section>
 
     <q-item-section top>
-      <q-item-label lines="1">
+      <h5 class="q-ma-none q-mb-sm">
         {{ bookmark.name }}
-      </q-item-label>
-      <a
-        class="q-mt-xs text-body2 text-weight-bold text-primary"
-        :href="bookmark.url"
-        target="_blank"
-      >
-        {{ bookmark.url }}
-      </a>
+      </h5>
+      <div class="flex items-center">
+        <a
+          class="text-body2 text-weight-bold text-primary"
+          :href="bookmark.url"
+          target="_blank"
+        >
+          {{ bookmark.url }}
+        </a>
+        <div class="dot bg-grey q-mx-sm" />
+        <span class="text-grey">
+          {{ toDisplayDate(bookmark.createdAt) }}
+        </span>
+      </div>
     </q-item-section>
 
     <q-item-section top side>
@@ -75,3 +83,11 @@ const openBookmarkUrl = () => {
     </q-item-section>
   </q-item>
 </template>
+
+<style scoped>
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+</style>

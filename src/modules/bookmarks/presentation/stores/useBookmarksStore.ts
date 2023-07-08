@@ -65,8 +65,8 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
     }
   }
 
-  async function updateBookmark(id: string, name: string, url: string) {
-    const updatedBookmark = await bookmarkService.updateBookmark(id, name, url);
+  async function updateBookmark(id: string, name: string, url: string, createdAt: number) {
+    const updatedBookmark = await bookmarkService.updateBookmark(id, name, url, createdAt);
 
     state.value.bookmarks = state.value.bookmarks.map((bookmark) => (
       bookmark.id === id
