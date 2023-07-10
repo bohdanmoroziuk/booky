@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { toDisplayDate } from 'src/shared/utils';
 
-import { Bookmark } from 'src/modules/bookmarks/domain/entities';
+import { Bookmark } from 'src/modules/bookmarks/domain';
 
 interface Props {
   bookmark: Bookmark;

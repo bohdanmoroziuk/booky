@@ -2,7 +2,7 @@
 
 import { UidGenerator } from 'src/shared/ports';
 
-import { BookmarkRepository } from 'src/modules/bookmarks/domain/repositories';
+import { BookmarkRepository } from 'src/modules/bookmarks/domain';
 
 export class BookmarkService {
   private bookmarkRepository: BookmarkRepository;

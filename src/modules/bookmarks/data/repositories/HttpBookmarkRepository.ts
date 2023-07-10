@@ -1,7 +1,6 @@
 import { HttpClient } from 'src/shared/ports';
 
-import { Bookmark } from 'src/modules/bookmarks/domain/entities';
-import { BookmarkRepository } from 'src/modules/bookmarks/domain/repositories';
+import { Bookmark, BookmarkRepository } from 'src/modules/bookmarks/domain';
 
 export class HttpBookmarkRepository implements BookmarkRepository {
   private http: HttpClient;

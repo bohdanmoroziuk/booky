@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 
-import { routes as bookmarksRoutes } from 'src/modules/bookmarks/presentation';
+import { routes as bookmarksRoutes } from 'src/modules/bookmarks';
 
 const routes: RouteRecordRaw[] = [
   {

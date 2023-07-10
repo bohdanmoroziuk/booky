@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Bookmark } from 'src/modules/bookmarks/domain/entities';
+import { Bookmark } from 'src/modules/bookmarks/domain';
 
 import BookmarkListItem from 'src/modules/bookmarks/presentation/components/BookmarkListItem.vue';
 

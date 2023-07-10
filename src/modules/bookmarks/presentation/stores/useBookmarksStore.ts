@@ -3,9 +3,9 @@ import { defineStore } from 'pinia';
 
 import { AxiosHttpClient, QuasarUidGenerator } from 'src/shared/adapters';
 
-import { Bookmark } from 'src/modules/bookmarks/domain/entities';
-import { HttpBookmarkRepository } from 'src/modules/bookmarks/data/repositories';
-import { BookmarkService } from 'src/modules/bookmarks/application/services';
+import { Bookmark } from 'src/modules/bookmarks/domain';
+import { HttpBookmarkRepository } from 'src/modules/bookmarks/data';
+import { BookmarkService } from 'src/modules/bookmarks/application';
 
 export interface BookmarksStoreState {
   bookmarks: Bookmark[];
