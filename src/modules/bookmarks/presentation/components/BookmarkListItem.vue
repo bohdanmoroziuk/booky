@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Bookmark } from 'src/modules/bookmarks/domain/entities';
+import { toDisplayDate } from 'src/shared/utils';
+
+import { Bookmark } from 'src/modules/bookmarks/domain';
 
 interface Props {
   bookmark: Bookmark;
@@ -7,6 +9,7 @@ interface Props {
 
 interface Emits {
   (event: 'delete'): void;
+  (event: 'open-url'): void;
 }
 
 defineProps<Props>();
@@ -15,6 +18,10 @@ const emit = defineEmits<Emits>();
 
 const deleteBookmark = () => {
   emit('delete');
+};
+
+const openBookmarkUrl = () => {
+  emit('open-url');
 };
 </script>
 
@@ -25,21 +32,35 @@ const deleteBookmark = () => {
     </q-item-section>
 
     <q-item-section top>
-      <q-item-label lines="1">
+      <h5 class="q-ma-none q-mb-sm">
         {{ bookmark.name }}
-      </q-item-label>
-      <a
-        class="q-mt-xs text-body2 text-weight-bold text-primary"
-        :href="bookmark.url"
-        target="_blank"
-      >
-        {{ bookmark.url }}
-      </a>
+      </h5>
+      <div class="flex items-center">
+        <a
+          class="text-body2 text-weight-bold text-primary"
+          :href="bookmark.url"
+          target="_blank"
+        >
+          {{ bookmark.url }}
+        </a>
+        <div class="dot bg-grey q-mx-sm" />
+        <span class="text-grey">
+          {{ toDisplayDate(bookmark.createdAt) }}
+        </span>
+      </div>
     </q-item-section>
 
     <q-item-section top side>
       <div class="q-gutter-xs">
-        <q-btn size="md" color="positive" flat dense round icon="open_in_new" />
+        <q-btn
+          size="md"
+          color="positive"
+          icon="open_in_new"
+          flat
+          dense
+          round
+          @click="openBookmarkUrl"
+        />
         <q-btn
           size="md"
           color="primary"
@@ -62,3 +83,11 @@ const deleteBookmark = () => {
     </q-item-section>
   </q-item>
 </template>
+
+<style scoped>
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+</style>

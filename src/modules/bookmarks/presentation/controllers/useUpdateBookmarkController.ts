@@ -7,11 +7,11 @@ export const useUpdateBookmarkController = () => {
 
   const bookmarksStore = useBookmarksStore();
 
-  const updateBookmark = async (id: string, name: string, url: string) => {
+  const updateBookmark = async (id: string, name: string, url: string, createdAt: number) => {
     try {
       quasar.loading.show();
 
-      await bookmarksStore.updateBookmark(id, name, url);
+      await bookmarksStore.updateBookmark(id, name, url, createdAt);
 
       quasar.notify({ type: 'positive', message: 'Bookmark updated' });
     } catch (error) {

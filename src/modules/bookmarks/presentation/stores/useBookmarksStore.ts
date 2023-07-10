@@ -1,11 +1,11 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 
-import { AxiosHttpClient, QuasarUidGenerator } from 'src/shared/infrastructure/services';
+import { AxiosHttpClient, QuasarUidGenerator } from 'src/shared/adapters';
 
-import { Bookmark } from 'src/modules/bookmarks/domain/entities';
-import { HttpBookmarkRepository } from 'src/modules/bookmarks/infrastructure/repositories';
-import { BookmarkService } from 'src/modules/bookmarks/application/services';
+import { Bookmark } from 'src/modules/bookmarks/domain';
+import { HttpBookmarkRepository } from 'src/modules/bookmarks/data';
+import { BookmarkService } from 'src/modules/bookmarks/application';
 
 export interface BookmarksStoreState {
   bookmarks: Bookmark[];
@@ -65,8 +65,8 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
     }
   }
 
-  async function updateBookmark(id: string, name: string, url: string) {
-    const updatedBookmark = await bookmarkService.updateBookmark(id, name, url);
+  async function updateBookmark(id: string, name: string, url: string, createdAt: number) {
+    const updatedBookmark = await bookmarkService.updateBookmark(id, name, url, createdAt);
 
     state.value.bookmarks = state.value.bookmarks.map((bookmark) => (
       bookmark.id === id

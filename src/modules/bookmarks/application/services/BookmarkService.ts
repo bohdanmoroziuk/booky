@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 
-import { UidGenerator } from 'src/shared/infrastructure/interfaces';
+import { UidGenerator } from 'src/shared/ports';
 
-import { BookmarkRepository } from 'src/modules/bookmarks/domain/repositories';
+import { BookmarkRepository } from 'src/modules/bookmarks/domain';
 
 export class BookmarkService {
   private bookmarkRepository: BookmarkRepository;
@@ -47,12 +47,14 @@ export class BookmarkService {
       id: this.uidGenerator.generate(),
       name,
       url,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
     };
 
     return this.bookmarkRepository.add(bookmark);
   }
 
-  async updateBookmark(id: string, name: string, url: string) {
+  async updateBookmark(id: string, name: string, url: string, createdAt: number) {
     if (this.isValidName(name) === false) throw new Error('Invalid name');
 
     if (this.isValidHttpUrl(url) === false) throw new Error('Invalid url');
@@ -61,6 +63,8 @@ export class BookmarkService {
       id,
       name,
       url,
+      createdAt,
+      updatedAt: Date.now(),
     };
 
     return this.bookmarkRepository.update(bookmark);

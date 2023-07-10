@@ -9,7 +9,7 @@ bookmarks/
 ├── domain/
 │   ├── entities
 │   └── repositories
-├── infrastructure/
+├── data/
 │   └── repositories
 ├── application/
 │   └── services

@@ -1,19 +1,11 @@
 {
   "bookmarks": [
     {
-      "id": "1",
-      "name": "Vue.js",
-      "url": "https://vuejs.org/"
-    },
-    {
-      "id": "2",
-      "name": "React",
-      "url": "https://react.dev/"
-    },
-    {
-      "id": "ada38659-2b32-40fe-98b8-714f843888d6",
-      "name": "TypeScript",
-      "url": "https://www.typescriptlang.org/"
+      "id": "5edf26c0-4f05-49bc-97b7-61eb2f35cd33",
+      "name": "Vue 3 | The Progressive JavaScript Framework",
+      "url": "https://vuejs.org/",
+      "createdAt": 1688815340427,
+      "updatedAt": 1689002187080
     }
   ]
 }

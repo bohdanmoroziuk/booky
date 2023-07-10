@@ -30,7 +30,8 @@ const handleGetBookmarkById = async () => {
 };
 
 const handleBookmarkUpdate = async () => {
-  await updateBookmark(props.bookmarkId, name.value, url.value);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  await updateBookmark(props.bookmarkId, name.value, url.value, bookmark.value!.createdAt);
 };
 
 const handleReset = () => {
