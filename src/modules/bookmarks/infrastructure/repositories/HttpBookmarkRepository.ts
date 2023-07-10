@@ -1,4 +1,4 @@
-import { HttpClient } from 'src/shared/infrastructure/interfaces';
+import { HttpClient } from 'src/shared/ports';
 
 import { Bookmark } from 'src/modules/bookmarks/domain/entities';
 import { BookmarkRepository } from 'src/modules/bookmarks/domain/repositories';

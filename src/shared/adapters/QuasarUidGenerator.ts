@@ -2,7 +2,7 @@
 
 import { uid } from 'quasar';
 
-import { UidGenerator } from 'src/shared/infrastructure/interfaces';
+import { UidGenerator } from 'src/shared/ports';
 
 export class QuasarUidGenerator implements UidGenerator {
   generate(): string {

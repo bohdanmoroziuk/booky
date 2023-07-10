@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 
-import { UidGenerator } from 'src/shared/infrastructure/interfaces';
+import { UidGenerator } from 'src/shared/ports';
 
 import { BookmarkRepository } from 'src/modules/bookmarks/domain/repositories';
 

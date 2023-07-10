@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 
-import { AxiosHttpClient, QuasarUidGenerator } from 'src/shared/infrastructure/services';
+import { AxiosHttpClient, QuasarUidGenerator } from 'src/shared/adapters';
 
 import { Bookmark } from 'src/modules/bookmarks/domain/entities';
 import { HttpBookmarkRepository } from 'src/modules/bookmarks/infrastructure/repositories';

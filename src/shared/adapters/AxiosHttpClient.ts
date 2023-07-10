@@ -2,7 +2,7 @@
 
 import axios, { AxiosInstance } from 'axios';
 
-import { HttpClient, RequestConfig } from 'src/shared/infrastructure/interfaces';
+import { HttpClient, RequestConfig } from 'src/shared/ports';
 
 export class AxiosHttpClient implements HttpClient {
   private http: AxiosInstance;
