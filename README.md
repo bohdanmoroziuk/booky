@@ -2,14 +2,35 @@
 
 This is a minimal example implementation of Clean Architecture in Vue/Quasar
 
+## Project architecture
+
+The project architecture consists of 4 levels: Presentation, Application,
+Domain and Data (Infrastructure).
+
+![Project architecture](./clean-architecture.png)
+
+The characteristics of the layers are as follows:
+
+- **Presentation**: This layer is basically made of UI components. The Presentation
+Layer is directly coupled to the Application Layer.
+- **Application**: This layer contains application logic. It knows of the Domain
+Layer and the Infrastructure Layer.
+- **Domain**: This layer is for domain/business logic. Only business logic lives in
+the Domain layer, so there is just pure JavaScript/TypeScript code with no
+frameworks/libraries whatsoever here.
+- **Data**: This layer is responsible for communications with the outside
+world (sending requests/receiving responses).
+
 ## Module structure
+
+The app consists of 1 module - bookmarks.
 
 ```txt
 bookmarks/
+├── data/
+│   └── repositories
 ├── domain/
 │   ├── entities
-│   └── repositories
-├── data/
 │   └── repositories
 ├── application/
 │   └── services
