@@ -2,6 +2,13 @@
 
 This is a minimal example implementation of Clean Architecture in Vue/Quasar
 
+## To-do list
+
+- [ ] Advanced error handling (Either)
+- [ ] Test-driven development
+- [ ] Dependency injection
+- [ ] Data mapping
+
 ## Project architecture
 
 The project architecture consists of 4 levels: Presentation, Application,
