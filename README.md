@@ -14,7 +14,7 @@ This is a minimal example implementation of Clean Architecture in Vue/Quasar
 The project architecture consists of 4 levels: Presentation, Application,
 Domain and Data (Infrastructure).
 
-![Project architecture](./clean-architecture.png)
+![Project architecture](./diagram.png)
 
 The characteristics of the layers are as follows:
 
