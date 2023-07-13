@@ -9,7 +9,12 @@ import {
 
 import { BookmarkList } from 'src/modules/bookmarks/presentation/components';
 
-const { getBookmarks, bookmarks } = useGetBookmarksController();
+const {
+  getBookmarks,
+  bookmarks,
+  totalBookmarks,
+  hasBookmarks,
+} = useGetBookmarksController();
 
 const { deleteBookmark } = useDeleteBookmarkController();
 
@@ -22,6 +27,10 @@ onMounted(getBookmarks);
   <div>
     <div class="q-pa-md">
       <div class="flex items-center q-gutter-sm">
+        <div v-if="hasBookmarks">
+          Total bookmarks: {{ totalBookmarks }}
+        </div>
+        <q-space />
         <q-btn
           color="primary"
           icon="refresh"

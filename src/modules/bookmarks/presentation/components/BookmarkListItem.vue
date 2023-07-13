@@ -3,6 +3,8 @@ import { toDisplayDate } from 'src/shared/utils';
 
 import { Bookmark } from 'src/modules/bookmarks/domain';
 
+import BookmarkListItemUrl from 'src/modules/bookmarks/presentation/components/BookmarkListItemUrl.vue';
+
 interface Props {
   bookmark: Bookmark;
 }
@@ -28,26 +30,24 @@ const openBookmarkUrl = () => {
 <template>
   <q-item class="q-pa-md">
     <q-item-section avatar top>
-      <q-icon name="bookmark" color="primary" size="34px" />
+      <q-icon name="bookmark" color="primary" size="sm" />
     </q-item-section>
 
     <q-item-section top>
-      <h5 class="q-ma-none q-mb-sm">
-        {{ bookmark.name }}
-      </h5>
-      <div class="flex items-center">
-        <a
-          class="text-body2 text-weight-bold text-primary"
-          :href="bookmark.url"
-          target="_blank"
-        >
-          {{ bookmark.url }}
-        </a>
-        <div class="dot bg-grey q-mx-sm" />
-        <span class="text-grey">
-          {{ toDisplayDate(bookmark.createdAt) }}
-        </span>
-      </div>
+      <q-item-label lines="1">
+        <h6 class="q-ma-none text-weight-regular">
+          {{ bookmark.name }}
+        </h6>
+      </q-item-label>
+      <q-item-label lines="1">
+        <div class="flex-inline items-center">
+          <bookmark-list-item-url :url="bookmark.url" />
+          <div class="dot inline-block bg-grey q-mx-sm" />
+          <span class="text-grey">
+            {{ toDisplayDate(bookmark.createdAt) }}
+          </span>
+        </div>
+      </q-item-label>
     </q-item-section>
 
     <q-item-section top side>
