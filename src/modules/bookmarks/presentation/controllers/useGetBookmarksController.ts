@@ -8,7 +8,7 @@ export const useGetBookmarksController = () => {
 
   const bookmarksStore = useBookmarksStore();
 
-  const { bookmarks } = storeToRefs(bookmarksStore);
+  const { bookmarks, totalBookmarks, hasBookmarks } = storeToRefs(bookmarksStore);
 
   const getBookmarks = async () => {
     try {
@@ -23,6 +23,8 @@ export const useGetBookmarksController = () => {
 
   return {
     bookmarks,
+    totalBookmarks,
+    hasBookmarks,
     getBookmarks,
   };
 };

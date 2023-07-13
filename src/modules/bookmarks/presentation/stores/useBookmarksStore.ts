@@ -36,6 +36,8 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
 
   const totalBookmarks = computed(() => state.value.bookmarks.length);
 
+  const hasBookmarks = computed(() => state.value.bookmarks.length > 0);
+
   // Actions
 
   async function getBookmarks() {
@@ -79,6 +81,7 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
     bookmark,
     bookmarks,
     totalBookmarks,
+    hasBookmarks,
     getBookmarks,
     createBookmark,
     deleteBookmark,
